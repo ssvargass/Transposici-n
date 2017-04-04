@@ -1,0 +1,63 @@
+<md-grid-list cols="6" rowHeight="500px">
+    <md-grid-tile colspan="2">
+        <md-card class="result">
+            <md-card-content>
+                <h2 class="example-h2">Método de transposición</h2>
+                <section>
+                    <md-slide-toggle [(ngModel)]="mode" (ngModelChange)="encrypt()">
+                        Columnas
+                    </md-slide-toggle>
+                </section>
+                <section>
+                    <md-input-container>
+                        <input mdInput placeholder="Texto a encriptar"[(ngModel)]="text" (ngModelChange)="encrypt()">
+                    </md-input-container>
+                </section>
+            </md-card-content>
+        </md-card>
+    </md-grid-tile>
+
+    <md-grid-tile colspan="2">
+        <md-card class="result">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th *ngFor="let filas of matrix; let i = index">
+                            {{i}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let filas of matrix; let j = index">
+                        <th>{{j}}</th>
+                        <td *ngFor="let column of filas">
+                            {{column}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-card>
+    </md-grid-tile>
+
+    <md-grid-tile colspan="2">
+        <md-card class="encrypt">
+            <section>
+                <h3>Su clave es:</h3>
+                <md-chip-list class="mat-chip-list-stacked">
+                    <md-chip *ngFor="let key of keys"
+                             selected="true"
+                             color="primary">
+                        {{key}}
+                    </md-chip>
+                </md-chip-list>
+                <a md-raised-button (click)="getKey()">Nueva clave</a>
+            </section>
+            <section>
+                <h3>Texto cifrado:</h3>
+                <p>{{encrypted}}</p>
+            </section>
+        </md-card>
+    </md-grid-tile>
+
+</md-grid-list>
